@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Behind — An Invitation to the Hidden</title>
+    <meta
+      name="description"
+      content="A sleek, monochrome speakeasy landing page with gallery and modal."
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              display: [
+                "Inter",
+                "ui-sans-serif",
+                "system-ui",
+                "-apple-system",
+                "Segoe UI",
+                "Roboto",
+                "Helvetica",
+                "Arial",
+              ],
+            },
+            letterSpacing: { tighter2: "-0.02em" },
+            boxShadow: { soft: "0 8px 40px rgba(0,0,0,0.12)" },
+            keyframes: {
+              fade: {
+                from: { opacity: 0, transform: "translateY(8px)" },
+                to: { opacity: 1, transform: "translateY(0)" },
+              },
+              zoomIn: {
+                from: { transform: "scale(0.98)" },
+                to: { transform: "scale(1)" },
+              },
+            },
+            animation: {
+              fade: "fade 600ms ease-out both",
+              zoomIn: "zoomIn 180ms ease-out both",
+            },
+          },
+        },
+      };
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body
+    class="font-display text-neutral-900 bg-white selection:bg-black selection:text-white"
+  >
+    <!-- Page frame -->
+    <div class="max-w-[1100px] mx-auto my-6 md:my-8 border-8 border-black">
+      <div
+        class="px-4 sm:px-6 lg:px-10 pt-6 pb-10 relative overflow-hidden mono"
+      >
+        <!-- ===== HERO ===== -->
+        <header id="hero"></header>
+
+        <!-- ===== BEHIND===== -->
+        <section id="behind" class="mt-16 md:mt-20"></section>
+
+        <!-- ===== GALLERY ===== -->
+        <section id="gallery" class="mt-10 md:mt-12"></section>
+
+        <!-- ===== CTA ===== -->
+        <div class="text-center mt-8 md:mt-10">
+          <a
+            href="#guestlist"
+            class="inline-block uppercase text-[11px] tracking-[0.2em] font-semibold px-4 py-2 border border-black hover:-translate-y-0.5 active:translate-y-0 transition"
+          >
+            Guestlist
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <button
+      id="toTop"
+      class="fixed bottom-6 right-6 hidden md:flex items-center justify-center w-10 h-10 border border-black bg-white/90 backdrop-blur text-[12px] uppercase tracking-[0.16em]"
+      aria-label="Scroll to top"
+    >
+      Top
+    </button>
+
+    <div
+      id="imgModal"
+      class="fixed inset-0 z-50 hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+      <div class="absolute inset-0 bg-black/70"></div>
+      <div class="relative h-full w-full flex items-center justify-center p-4">
+        <figure
+          class="bg-white p-2 md:p-3 shadow-soft max-w-5xl w-full animate-zoomIn"
+        >
+          <img
+            id="modalImage"
+            src=""
+            alt="Expanded image"
+            class="w-full h-auto object-contain"
+          />
+          <button
+            id="modalClose"
+            class="absolute top-3 right-3 w-9 h-9 border border-black bg-white hover:bg-neutral-50"
+            aria-label="Close image"
+          >
+            ✕
+          </button>
+        </figure>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

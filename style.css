@@ -1,0 +1,12 @@
+.mono img {
+  filter: grayscale(100%);
+}
+.overflow-lock {
+  overflow: hidden;
+}
+
+@media (min-width: 300px) {
+  .hero-sub-300 {
+    font-size: 0.75rem;
+  }
+}
