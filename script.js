@@ -24,3 +24,14 @@ modal.addEventListener('click', (e) => {
 window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
 });
+
+const toTop = document.getElementById('toTop');
+const revealAt = 320; // px
+const onScroll = () => {
+  const y = window.scrollY || window.pageYOffset;
+  if (y > revealAt) toTop.classList.remove('hidden');
+  else toTop.classList.add('hidden');
+};
+window.addEventListener('scroll', onScroll);
+toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+onScroll();
