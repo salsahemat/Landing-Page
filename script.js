@@ -19,7 +19,12 @@ document.querySelectorAll('[data-modal-src]').forEach(btn => {
 });
 modalClose.addEventListener('click', closeModal);
 modal.addEventListener('click', (e) => {
-  if (e.target === modal || e.target === modal.firstElementChild) closeModal();
+  const clickedCloseBtn = e.target.closest('#modalClose');
+  const clickedImage = e.target.closest('#modalImage');
+  const clickedOverlay = e.target.matches('[data-overlay]');
+  if (clickedOverlay || (!clickedImage && !clickedCloseBtn)) {
+    closeModal();
+  }
 });
 window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
