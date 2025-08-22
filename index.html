@@ -10,7 +10,17 @@
     />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+      (function () {
+        const stored = localStorage.getItem("theme");
+        const systemDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        if (stored === "dark" || (!stored && systemDark)) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
       tailwind.config = {
+        darkMode: "class",
         theme: {
           extend: {
             fontFamily: {
@@ -55,13 +65,23 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body
-    class="font-display text-neutral-900 bg-white selection:bg-black selection:text-white"
+    class="antialiased font-display bg-white text-neutral-900 selection:bg-black selection:text-white dark:bg-neutral-950 dark:text-neutral-100 dark:selection:bg-white dark:selection:text-black"
   >
     <!-- Page frame -->
-    <div class="max-w-[1100px] mx-auto my-6 md:my-8 border-8 border-black">
+    <div
+      class="max-w-[1100px] mx-auto my-6 md:my-8 border-8 border-black dark:border-white"
+    >
       <div
         class="px-4 sm:px-6 lg:px-10 pt-6 pb-10 relative overflow-hidden mono"
       >
+        <!-- Theme toggle -->
+        <button
+          id="themeToggle"
+          class="absolute top-4 right-4 inline-flex items-center gap-2 uppercase text-[11px] tracking-[0.2em] font-semibold px-3 py-1 border border-black bg-white text-black hover:-translate-y-0.5 active:translate-y-0 transition dark:bg-black dark:text-white dark:border-white dark:hover:translate-y-0"
+        >
+          <span id="themeIcon" aria-hidden="true">🌙</span>
+          <span class="sr-only">Toggle dark mode</span>
+        </button>
         <!-- ===== HERO ===== -->
         <header id="hero" class="relative">
           <h1
@@ -80,19 +100,27 @@
             class="mt-2 grid grid-cols-1 md:[grid-template-columns:200px_200px_minmax(0,1fr)] gap-x-8 gap-y-6 items-baseline"
           >
             <div class="uppercase text-[11px] tracking-[0.2em] font-semibold">
-              <div class="text-neutral-600 leading-4">Curated selection of</div>
-              <div class="text-black mt-1 font-bold text-[18px] leading-tight">
+              <div class="text-neutral-600 dark:text-neutral-400 leading-4">
+                Curated selection of
+              </div>
+              <div
+                class="text-black mt-1 font-bold text-[18px] leading-tight dark:text-neutral-400"
+              >
                 FINE SPIRITS
               </div>
             </div>
             <div class="uppercase text-[11px] tracking-[0.2em] font-semibold">
-              <div class="text-neutral-600 leading-4">A hidden gem</div>
-              <div class="text-black mt-1 font-bold text-[18px] leading-tight">
+              <div class="text-neutral-600 leading-4 dark:text-neutral-400">
+                A hidden gem
+              </div>
+              <div
+                class="text-black mt-1 font-bold text-[18px] leading-tight dark:text-neutral-400"
+              >
                 7 NIGHTS / WEEK
               </div>
             </div>
             <p
-              class="md:col-start-3 text-[13px] md:text-[14px] leading-6 md:leading-7 text-neutral-700"
+              class="md:col-start-3 text-[13px] md:text-[14px] leading-6 md:leading-7 text-neutral-700 dark:text-neutral-300"
             >
               Step into a place where time slows down and the night feels
               endless. Our speakeasy offers a unique, intimate atmosphere,
@@ -110,12 +138,12 @@
             Behind
           </h2>
           <div
-            class="uppercase text-[11px] tracking-[0.3em] mt-1 text-neutral-600 font-bold"
+            class="uppercase text-[11px] tracking-[0.3em] mt-1 text-neutral-600 font-extrabold dark:text-neutral-400"
           >
             Closed Doors
           </div>
           <p
-            class="max-w-[60ch] mx-auto mt-4 text-[14px] md:text-[15px] leading-7 text-neutral-700"
+            class="max-w-[60ch] mx-auto mt-4 text-[14px] md:text-[15px] leading-7 text-neutral-700 dark:text-neutral-400"
           >
             Our speakeasy offers an atmosphere that's both sleek and relaxed,
             perfect for those who appreciate the finer things in life. Whether
@@ -205,7 +233,7 @@
         <div class="text-center mt-8 md:mt-10">
           <a
             href="#guestlist"
-            class="inline-block uppercase text-[11px] tracking-[0.2em] font-semibold px-4 py-2 border border-black bg-black text-white hover:bg-neutral-800 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 transition"
+            class="inline-block uppercase text-[11px] tracking-[0.2em] font-semibold px-4 py-2 border border-black bg-black text-white hover:bg-neutral-800 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 transition dark:bg-white dark:text-black dark:border-white dark:hover:bg-neutral-200 dark:focus-visible:ring-white/40"
           >
             Guestlist
           </a>
@@ -237,7 +265,7 @@
         />
         <button
           id="modalClose"
-          class="absolute top-4 right-4 z-50 w-9 h-9 border border-black bg-white hover:bg-neutral-50"
+          class="absolute top-4 right-4 z-50 w-9 h-9 border border-black bg-white hover:bg-neutral-50 dark:border-white dark:bg-black dark:text-white dark:hover:bg-neutral-900"
           aria-label="Close image"
         >
           ✕

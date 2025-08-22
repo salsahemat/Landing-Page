@@ -40,3 +40,19 @@ const onScroll = () => {
 window.addEventListener('scroll', onScroll);
 toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 onScroll();
+
+(function () {
+  const btn = document.getElementById('themeToggle');
+  const icon = document.getElementById('themeIcon');
+
+  function setIcon(isDark) { icon.textContent = isDark ? '☀️' : '🌙'; }
+
+  setIcon(document.documentElement.classList.contains('dark'));
+
+  btn.addEventListener('click', () => {
+    const el = document.documentElement;
+    const isDark = el.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    setIcon(isDark);
+  });
+})();
